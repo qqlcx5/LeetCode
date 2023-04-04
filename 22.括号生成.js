@@ -9,6 +9,49 @@
  * @param {number} n
  * @return {string[]}
  */
+var generateParenthesis = function(n) {
+    let stuck = []
+    let count = 0
+    let current = ''
+    let left = n
+    let right = n
+    let isValid = true
+    let isStuck = false
+    while (count < n * 2) {
+        if (isValid) {
+            if (left > 0) {
+                current += '('
+                left--
+                count++
+            } else if (right > 0) {
+                current += ')'
+                right--
+                count++
+            } else {
+                isValid = false
+            }
+        } else {
+            if (current[count - 1] === '(') {
+                current = current.slice(0, count - 1) + ')'
+                right++
+                count--
+            } else {
+                current = current.slice(0, count - 1) + '('
+                left++
+                count--
+            }
+        }
+        if (current.length === n * 2) {
+            stuck.push(current)
+            current = ''
+            count = 0
+            left = n
+            right = n
+            isValid = true
+        }
+    }
+};
+
 // var generateParenthesis = function(n) {
 //   const result = [];
 
@@ -93,25 +136,22 @@
 // };
 
 
-var generateParenthesis = function (n) {
-  const result = [];
-  function stack(str, left, right) {
-    console.log("🚀 ~ file: 22.括号生成.js:99 ~ stack ~ str, left, right:", str, left, right);
+// var generateParenthesis = function (n) {
+//   const result = [];
+//   function stack(str, left, right) {
+//     if (str.length === n * 2) {
+//       result.push(str);
+//       return;
+//     }
+//     if (left < n) {
+//       stack(str + '(', left + 1, right);
+//     }
+//     if (right < left) {
+//       stack(str + ')', left, right + 1);
+//     }
+//   }
+//   stack('', 0, 0);
+//   return result;
+// };
+// @lc code=end
 
-    if (str.length === n * 2) {
-      result.push(str);
-      return;
-    }
-    if (left < n) {
-      stack(str + '(', left + 1, right);
-    }
-    if (right < left) {
-      stack(str + ')', left, right + 1);
-    }
-  }
-  stack('', 0, 0);
-  return result;
-};
-
-// Example usage:
-console.log(generateParenthesis(3));
