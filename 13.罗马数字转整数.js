@@ -9,11 +9,23 @@
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function(s) {
-  
-};
-// 输入: s = "MCMXCIV";
-// 输出: 1994;
-// 解释: M = 1000, CM = 900, XC = 90, IV = 4.;
+var romanToInt = function (s) {
+    symbols = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    }
+    value = 0
+    for (let i = 0; i < s.length; i++) {
+        const a = s[i], b = s[i + 1]
+        symbols[a] < symbols[b] ? (value -= symbols[a]) : (value += symbols[a])
+        console.log(value);
+    }
+    return value
+}
+console.log(romanToInt('CMC'));
 // @lc code=end
-

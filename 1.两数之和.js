@@ -10,18 +10,24 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
-  let map = new Map();
-  for (var i = 0; i < nums.length; i++) {
-    const exist = target - nums[i];
-    if (map.has(exist)) {
-      return [map.get(exist), i]
+var twoSum = function (nums, target) {
+    const len = nums.length
+    for (let x = 0; x < len; x++) {
+        for (let y = x + 1; y < len; y++) {
+            if (nums[x] + nums[y] === target) {
+                return [x, y]
+            }
+        }
     }
-    map.set(nums[i], i)
-  }
-};
-
-
-twoSum(nums = [2, 7, 11, 15], target = 9)
+}
+// var twoSum = function (nums, target) {
+//     let map = new Map()
+//     for (var i = 0; i < nums.length; i++) {
+//         const exist = target - nums[i]
+//         if (map.has(exist)) {
+//             return [map.get(exist), i]
+//         }
+//         map.set(nums[i], i)
+//     }
+// }
 // @lc code=end
-
